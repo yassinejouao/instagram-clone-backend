@@ -1,2 +1,12 @@
-# instagram-clone-backend
-An instagram clone created with the MERN stack
+
+# Instagram clone using MERN stack
+
+This is the backend repo built with Express and MongoDB. If you looking for the frontend repo :
+
+
+## Authors
+
+- [@yassinjouao](https://github.com/yassinjouao)
+
+
+
