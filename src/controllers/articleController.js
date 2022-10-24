@@ -70,8 +70,8 @@ const getTimeline = async (req, res) => {
     const limit = parseInt(req.query.limit) || 3;
     const user = await User.findById(userid).select("followings");
     const myArticles = await Article.find({ user: userid })
-      .skip(page * limit)
-      .limit(3)
+      .skip(page * 1)
+      .limit(1)
       .sort({ createdAt: "desc" })
       .populate("user", "username profilePicture");
     const followingsArticles = await Promise.all(
@@ -82,8 +82,8 @@ const getTimeline = async (req, res) => {
             $gte: new Date(new Date().getTime() - 86400000).toISOString(),
           },
         })
-          .skip(page * 3)
-          .limit(3)
+          .skip(page * 1)
+          .limit(1)
           .sort({ createdAt: "desc" })
           .populate("user", "username profilePicture");
       })
@@ -92,7 +92,7 @@ const getTimeline = async (req, res) => {
     res.status(200).send({
       status: "success",
       Articles: arr,
-      limit: limit,
+      limit: arr.length,
     });
   } catch (e) {
     res.status(500).send({
