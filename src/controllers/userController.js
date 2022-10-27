@@ -2,13 +2,13 @@ const bcrypt = require("bcrypt");
 const User = require("../Models/userModel");
 
 //dont work right now
-const deleteUser = async (req, res) => {
-  if (req.user.username === req.params.username || req.user.role === "admin") {
-    res.status(200).json("User has been deleted.");
-  } else {
-    res.status(403).json("You are not allowed to delete this user!");
-  }
-};
+// const deleteUser = async (req, res) => {
+//   if (req.user.username === req.params.username || req.user.role === "admin") {
+//     res.status(200).json("User has been deleted.");
+//   } else {
+//     res.status(403).json("You are not allowed to delete this user!");
+//   }
+// };
 const updateUser = async (req, res) => {
   if (req.user._id === req.params.id || req.user.role === "admin") {
     if (req.body.password) {
