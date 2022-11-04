@@ -67,11 +67,11 @@ const getTimeline = async (req, res) => {
   try {
     const userid = req.user._id;
     const page = parseInt(req.query.page) - 1 || 0;
-    const limit = parseInt(req.query.limit) || 3;
+    const limit = parseInt(req.query.limit) || 1;
     const user = await User.findById(userid).select("followings");
     const myArticles = await Article.find({ user: userid })
-      .skip(page * 1)
-      .limit(1)
+      .skip(page * limit)
+      .limit(limit)
       .sort({ createdAt: "desc" })
       .populate("user", "username profilePicture");
     const followingsArticles = await Promise.all(
@@ -82,8 +82,8 @@ const getTimeline = async (req, res) => {
             $gte: new Date(new Date().getTime() - 86400000).toISOString(),
           },
         })
-          .skip(page * 1)
-          .limit(1)
+          .skip(page * limit)
+          .limit(limit)
           .sort({ createdAt: "desc" })
           .populate("user", "username profilePicture");
       })
